@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="rollingFileAppender"
+		class="ch.qos.logback.core.rolling.RollingFileAppender" append="true">
+		<file name="">${catalina.base}/logs/storage/myapp.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>
+				${catalina.base}/logs/storage/myapp-%d.log
+			</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date{ISO8601} [%thread] %-5level %logger{35} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<appender name="rollingFileAppenderSpring"
+		class="ch.qos.logback.core.rolling.RollingFileAppender" append="true">
+		<file name="">${catalina.base}/logs/storage/spring.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>
+				${catalina.base}/logs/storage/spring-%d.log
+			</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date{ISO8601} [%thread] %-5level %logger{35} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<logger name="org.springframework" additivity="false" level="DEBUG">
+	<appender-ref ref="rollingFileAppenderSpring"/>
+	</logger>
+	<root level="DEBUG">
+		<appender-ref ref="rollingFileAppender" />
+	</root>
+	
+</configuration>
